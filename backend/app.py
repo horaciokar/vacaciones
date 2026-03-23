@@ -18,4 +18,4 @@ def fotos():
 
     return jsonify(cursor.fetchall())
 
-app.run(host="0.0.0.0", port=5000)
+app.run(host="0.0.0.0", port=7007)
