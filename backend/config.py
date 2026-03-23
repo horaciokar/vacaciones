@@ -3,5 +3,5 @@ DB_USER = "root"
 DB_PASSWORD = "TU_PASSWORD"
 DB_NAME = "vacaciones"
 
-S3_BUCKET = "vacaciones"
+S3_BUCKET = "vacaciones2026"
 REGION = "us-east-1"
