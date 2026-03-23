@@ -15,7 +15,28 @@ cursor = db.cursor()
 
 BUCKET = S3_BUCKET
 
-response = s3.list_objects_v2(Bucket=BUCKET)
+paginator = s3.get_paginator("list_objects_v2")
+
+for page in paginator.paginate(Bucket=BUCKET):
+    for obj in page.get("Contents", []):
+        key = obj["Key"]
+
+        if key.endswith((".jpg", ".jpeg", ".png")):
+            print(f"Procesando {key}")
+
+            url = f"https://{BUCKET}.s3.amazonaws.com/{key}"
+
+            cursor.execute("SELECT id FROM fotos WHERE url=%s", (url,))
+            if cursor.fetchone():
+                print("Ya existe, skip")
+                continue
+
+            cursor.execute(
+                "INSERT INTO fotos (nombre, url, fecha) VALUES (%s, %s, NOW())",
+                (key, url)
+            )
+
+            db.commit()
 
 for obj in response.get("Contents", []):
     key = obj["Key"]
