@@ -5,7 +5,7 @@ async function load() {
     const g = document.getElementById("galeria");
 
     data.forEach(f => {
-        g.innerHTML += `<img src="${f.url}" width="300">`;
+        g.innerHTML += `<img src="${encodeURI(f.url)}" width="300">`;
     });
 }
 
