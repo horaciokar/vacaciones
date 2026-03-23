@@ -1,0 +1,15 @@
+body {
+    font-family: Arial;
+    background: #111;
+    color: white;
+}
+
+#galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+img {
+    border-radius: 10px;
+}
